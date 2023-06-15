@@ -33,6 +33,19 @@ app.get("/api/notes/:id", function (req, res) {
     res.json(notes[Number(req.params.id)]);
   });
 
+// POST route /api/notes
+app.post("/api/notes", function (req, res) {
+    let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let newNote = req.body;
+    let uniqueID = savedNotes.length.toString();
+    newNote.id = uniqueID;
+    notes.push(newNote);
+
+    fs.writeFileSync("./db/db.json", JSON.stringify(notes));
+    console.log("Note saved to db.json. ");
+    res.json(notes);
+    });
+
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
