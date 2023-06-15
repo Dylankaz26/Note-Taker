@@ -28,10 +28,10 @@ app.get("/api/notes/:id", function (req, res) {
     res.json(notes[Number(req.params.id)]);
   });
 
-// GET Route for feedback page
-app.get('/feedback', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/pages/feedback.html'))
-);
+  app.get("/api/notes/:id", function (req, res) {
+    let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    res.json(notes[Number(req.params.id)]);
+  });
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
