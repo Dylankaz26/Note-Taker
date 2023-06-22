@@ -28,10 +28,10 @@ app.get("/api/notes/:id", function (req, res) {
     res.json(notes[Number(req.params.id)]);
   });
 
-  app.get("/api/notes/:id", function (req, res) {
-    let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-    res.json(notes[Number(req.params.id)]);
-  });
+// GET Route for homepage
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 
 // POST route /api/notes
 app.post("/api/notes", function (req, res) {
